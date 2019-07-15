@@ -1,0 +1,118 @@
+- Class: meta
+  Course: Introduction
+  Lesson: 9_Introduccion_Import_Tidy_Transform
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.4
+
+- Class: text
+  Output: En las lecciones anteriores revisamos transformacion y visualizacion sobre un marco de datos. Ahora nos enfocaremos en la gestion de datos, el arte de convertir sus datos en R en forma util para la visualizacion y modelado. Dentro de la gestion de datos tenemos la importacion de datos (formas de importar los datos csv,txt,MySql), datos ordenados, cruzes de informacion  y datos relacionales, manejo de texto y caracteres, fechas y horarios. 
+
+- Class: text
+  Output: En ocaciones trabajaremos con un tipo de marcos de datos especil llamado tibble en lugar del tradicional data.frame. Los tibbles son un marco de datos, que modifican algunos comportamientos antiguos para hacer la vida un poco mas facil. R es un lenguaje antiguo, es dificil cambiar la base R sin romper el codigo existente, por lo que la mayoria de la innovacion ocurre en paquetes. Aque describiremos el paquete tibble.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; library(tidyverse)
+  CorrectAnswer: library(tidyverse)
+  AnswerTests: omnitest(correctExpr='library(tidyverse)')
+  Hint: Ejecuta en Consola; library(tidyverse)
+
+- Class: text
+  Output: En ocaciones es buena opcion forzar un marco de datos a formato tibble, con la funcion as_tibble(). Una ventaja de los tibbles es que nos permite trabajar mejor con grandes conjuntos de datos sin imprimir todos en la consola.
+  
+- Class: cmd_question
+  Output: Ejecuta en Consola; mtcars
+  CorrectAnswer: mtcars
+  AnswerTests: omnitest(correctExpr='mtcars')
+  Hint: Ejecuta en Consola; mtcars
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; as_tibble(mtcars)
+  CorrectAnswer: as_tibble(mtcars)
+  AnswerTests: omnitest(correctExpr='as_tibble(mtcars)')
+  Hint: Ejecuta en Consola; as_tibble(mtcars)
+
+- Class: text
+  Output: En ocasiones es de utilidad solo mostras el encabezado del conjunto de datos, observa que tibble automaticamente nos muestra el tipo de datos de cada columna.
+
+- Class: text
+  Output: Creemos nuestro primer marco de datos tibble, observe que no es necesario especificar la longitud del elemento y, crear este mismo marco de datos con un data.frame no se podria.
+  
+- Class: cmd_question
+  Output: Ejecuta en Consola; tibble(x = 1:5, y = 1, z = x ^ 2 + y)
+  CorrectAnswer: tibble(x = 1:5, y = 1, z = x ^ 2 + y)
+  AnswerTests: omnitest(correctExpr='tibble(x = 1:5, y = 1, z = x ^ 2 + y)')
+  Hint: Ejecuta en Consola; tibble(x = 1:5, y = 1, z = x ^ 2 + y)
+
+- Class: text
+  Output: Observa que el data.frame nos indica que x y y deberian estar predefinidos antes de inculir al marco de datos, cosa que un tibble nos permite colocar todo junto.
+
+- Class: text
+  Output: Otra diferencia es que dentro de un tibble podemos colocar nombres de columnas con metacaracetes especiales y en un data.frame esto no esta permitido.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; tb <- tibble(":)" = "smile", " "  = "space","2000" = "number")
+  CorrectAnswer: tb <- tibble(":)" = "smile", " "  = "space","2000" = "number")
+  AnswerTests: omnitest(correctExpr='tb <- tibble(":)" = "smile", " "  = "space","2000" = "number")')
+  Hint: Ejecuta en Consola; tb <- tibble(":)" = "smile", " "  = "space","2000" = "number")
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; tb
+  CorrectAnswer: tb
+  AnswerTests: omnitest(correctExpr='tb')
+  Hint: Ejecuta en Consola; tb
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; tb <- data.frame(":)" = "smile", " " = "space","2000" = "number")
+  CorrectAnswer: tb <- data.frame(":)" = "smile", " " = "space","2000" = "number")
+  AnswerTests: omnitest(correctExpr='tb <- data.frame(":)" = "smile", " " = "space","2000" = "number")')
+  Hint: Ejecuta en Consola; tb <- data.frame(":)" = "smile", " " = "space","2000" = "number")
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; tb
+  CorrectAnswer: tb
+  AnswerTests: omnitest(correctExpr='tb')
+  Hint: Ejecuta en Consola; tb
+
+- Class: text
+  Output: Otra forma de definir un tibble es con la funcion tribble, indicando las columnas y autmaticamente idenficara la posicion que le corresponde a cada fila.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; tribble(~x, ~y, ~z, "a", 2, 3.6,"b", 1, 8.5)
+  CorrectAnswer: tribble(~x, ~y, ~z, "a", 2, 3.6,"b", 1, 8.5)
+  AnswerTests: omnitest(correctExpr='tribble(~x, ~y, ~z, "a", 2, 3.6,"b", 1, 8.5)')
+  Hint: Ejecuta en Consola; tribble(~x, ~y, ~z, "a", 2, 3.6,"b", 1, 8.5)
+
+- Class: text
+  Output: La forma de seleccionar columnas en tibble es similar a data.frame
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; mtcars$mpg
+  CorrectAnswer: mtcars$mpg
+  AnswerTests: omnitest(correctExpr='mtcars$mpg')
+  Hint: Ejecuta en Consola; mtcars$mpg
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; mtcars[["mpg"]]
+  CorrectAnswer: mtcars[["mpg"]]
+  AnswerTests: omnitest(correctExpr='mtcars[["mpg"]]')
+  Hint: Ejecuta en Consola; mtcars[["mpg"]]
+
+- Class: text
+  Output: Para usarlos en una tuberia, debera usar el marcador de posicion especial
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; mtcars %>% .$mpg
+  CorrectAnswer: mtcars %>% .$mpg
+  AnswerTests: omnitest(correctExpr='mtcars %>% .$mpg')
+  Hint: Ejecuta en Consola; mtcars %>% .$mpg
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; mtcars %>% .[["mpg"]]
+  CorrectAnswer: mtcars %>% .[["mpg"]]
+  AnswerTests: omnitest(correctExpr='mtcars %>% .[["mpg"]]')
+  Hint: Ejecuta en Consola; mtcars %>% .[["mpg"]]
+
+- Class: text
+  Output: Algunas funciones antiguas no funcionan con tibble, como as.data.frame() no permite regresar un tibble a data.frame. Se que estas pensando que los tibble no son realmente muy utiles. Pero existen paqueterias que trabajan mejor o exclusivamente con tibble, tal vez de momento no los ocupe pero nunca esta de mas agregar un nueto tipo de datos en R.
