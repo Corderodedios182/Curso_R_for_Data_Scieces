@@ -1,0 +1,62 @@
+- Class: meta
+  Course: R_for_Data_Sciences
+  Lesson: 1_Introduction_Review
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.4
+
+- Class: text
+  Output: La ciencie de datos es una disciplina emocionante, permite convertir los datos sin procesar en comprension y conocimiento. El objetivo de las siguientes lecciones es ayudar a entender mejor las herramientas mas importantes de R que permitan realizar Data Sciences. La ciencia de datos abarca un campo enorme de disciplinas, no hay forma de abarcarlo todo en un curso. Pero el objetivo es brindarte las herramientas necesarias para un proyecto tipico.
+
+- Class: text
+  Output: Un ciclo habitual en un proyecto de Ciencia de Datos es;
+
+- Class: text
+  Output: Primero debemos importar los datos, significa que debemos saber tomar datos de distintas fuentes de informacion por ejemplo; archivo de texto, base de datos SQL o NoSQL, APIs, Paginas Web, etc. Una vez importados es buena idea darles un orden y estructura.
+
+- Class: text
+  Output: Segundo, una vez ordenados los datos transformemoslos. La transformacion incluye reducir las observaciones de interes, creacion de nuevas variables en funcion de variables existentes, resumenes estadisticos descriptivos. Juega el concepto de Manipulacion de los datos para entederlos mejor.
+  
+- Class: text
+  Output: Tercero, una vez que tenemos los datos estructurados y transformados, hay dos motores principales de generacion de conocimiento; visualizacion y modelado estos tienen fortalezas y debilidades, ejecutaremos repetidamente estas actividades ya que a medida que avanzemos con nuestros analisis las visualizaciones y modelos tendran cambios. La visualizacion nos permite escarbar en los datos, mientras que el modelado es una herramienta complementaria a la visualizacion. Una vez que hayamos hecho las preguntas suficientes y precisas podemos usar el modelado para responder.
+  
+- Class: text
+  Output: El ultimo paso de la ciencia de datos es la comunicacion, una parte absolutamente critica de cualquier proyecto de analisis de datos. No importa que tambien hayamos hecho el modelado o visualizaciones, la idea es poder aplicar y ejecutar los aprendizajes que obtengamos.
+  
+- Class: text
+  Output: Otra forma de ver el ciclo es como un proceso ETL (Extraccion Transformacion y Lectura de datos), agregando las visualizacion, modelado y comuncacion a nuestros conjuntos de datos.
+
+- Class: text
+  Output: Rodeado de todas estas herramientas se encuentra la programacion, siendo una herramienta transversal. No necesitas ser un programador experto para ser un cientifico de datos, pero aprender mas sobre programacion vale la pena nos permitira automatizar tareas comunes y resolver problemas con mayor facilidad.
+
+- Class: text
+  Output: ¿Como esta organizado el curso?
+
+- Class: text
+  Output: Primero nos adentraremos con las herramientas basicas para la exploracion de datos. Segundo veremos gestion de datos, convirtiendo los datos en una forma util para visualizar y modelar. Tercero tocaremos Progamacion donde veremos mejores practicas para aterrizar lo aprendido. Cuarto conceptos basicos de Modelado y por ultimo Comunicacion.
+
+- Class: text
+  Output: En las siguientes lecciones no trabajaremos con Python o Julia, tengamos en mente que son dos herramientas muy utiles que nos ayudaran a resolver una mayor cantidad de problemas. No trabajaremos con datos no rectangulares (NoSql), ni conexiones a bases de datos. Pero una vez dominadas las herramientas basicas, tomaras con mayor facilidad mejores conocimientos.
+
+- Class: text
+  Output: Antes de comenzar tengamos en mente que es posible dividir el analisis de datos en dos campos; generacion de hipotesis y confirmacion de hipotesis. El enfoque de las lecciones es sin duda sobre generacion de hipotesis o exploracion de datos. Aqui analizaremos en profundidad los datos, junto con los conocimiento del tema, se generaran mayor numero de hipotesis de manera informal. La confirmacion de hipotesis es dificil por dos razones, necesitamos un modelo matematico preciso esto a menudo requiere buenas bases de estadistica, se testea y confirma la hipotesis. Dicho de otra forma introduciremos a las herramientas basicas e importantes que debes conocer para hacer Cienca de datos adecuadamente.
+
+- Class: text
+  Output: Como Prerrequisito, ten instalados la coleccion de paquetes del tidyverse y un puñado de paquetes, en caso de tener algun problema con alguna leccion, sal e instala con calma el paquete que no te deje continuar.
+  
+- Class: text
+  Output: Si es la primera vez que te encuentras en Rstudio, observa que tiene 4 cuadrantes, de lado superior izquierdo se colocan los scripts e inferior izquierdo la consola donde estas ejecutando el curso, de lado superior derecho tenemos las variables e inferior derecho Ouputs.
+
+- Class: text
+  Output: Antes de comenzar asegurate de tener la paqueteria tidyverse
+  
+- Class: cmd_question
+  Output: Ejecuta; library(tidyverse)
+  CorrectAnswer: library(tidyverse)
+  AnswerTests: omnitest(correctExpr='library(tidyverse)')
+  Hint: En caso de obtener un error, ve a la parte inferior derecha pestaña package da click y instala tidyverse.
+
+- Class: text
+  Output: De igual manera valida que tengas, los paquetes "nycflights13", "gapminder", "Lahman". Recuerda library("nycflights13") si tienes algun error instalalos.
+

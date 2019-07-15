@@ -1,0 +1,172 @@
+- Class: meta
+  Course: R_for_Data_Sciences
+  Lesson: 7_Exploracion_de_datos
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.4
+
+- Class: text
+  Output: En esta leccion nos adentraremos a la exploracion de datos, usaremos la visualizacion y transformacion para explorar de manera sitematica, una tarea que los estadisticos llaman EDA. EDA es un ciclo iterativo, primero generanto preguntas, segundo buscando respuestas visualizando, transformando y modelando, tercero usamos lo aprendido para refinar las preguntas o generar nuevas preguntas. EDA no es un proceso formal es un estado de animo. Durante las fases iniciales de EDA, deve sentirse libre de investigar cada idea que se le ocurra. Algunas de estas ideas se desarrollaran y otras seran callejones sin salida. EDA es una parte importante de cualquier analisis, incluso si las preguntas se entregan en una bandeja, es bueno revisar la calidad de los datos. Para realizar la limpieza debera implementar todas las herramientas de EDA; visualizacion, tranformacion y modelado.
+  
+- Class: cmd_question
+  Output: Ejecuta en Consola; library(tidyverse)
+  CorrectAnswer: library(tidyverse)
+  AnswerTests: omnitest(correctExpr='library(tidyverse)')
+  Hint: Ejecuta en Consola; library(tidyverse)
+
+- Class: text
+  Output: Cuando hace una pregunta, la pregunta centra su atencion en una parte del conjunto de datos y lo ayuda a dicidir que graficos, modelos o transormaciones debe realizar. Y como la mayoria de los procesos creativos, la clave para hacer preguntas de calidad es generar una gran cantidad de preguntas. No hay una regla sobre que preguntas debe hacer, sin embargo tenemos 2 tipos de preguntas que siempre seran utiles. ¿Que tipo de variaciones tienen los datos?, ¿Que tipo relaciones existe entre variables?
+
+- Class: text
+  Output: Comencemos por examinar una variable categorica, usando graficas de barras para contar el numero de elementos. Trabajaremos con el conjunto de datos mpg.
+  
+- Class: cmd_question
+  Output: Ejecuta en Consola; head(mpg)
+  CorrectAnswer: head(mpg)
+  AnswerTests: omnitest(correctExpr='head(mpg)')
+  Hint: Ejecuta en Consola; head(mpg)
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = drv)) + labs(title = "Tipos de autos (class) y proporcion en cada grupo de la variable drv", subtitle = "especificando el parametro fill = drv logramos colorear")
+  CorrectAnswer: ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = drv)) + labs(title = "Tipos de autos (class) y proporcion en cada grupo de la variable drv", subtitle = "especificando el parametro fill = drv logramos colorear")
+  AnswerTests: omnitest(correctExpr='ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = drv)) + labs(title = "Tipos de autos (class) y proporcion en cada grupo de la variable drv", subtitle = "especificando el parametro fill = drv logramos colorear")')
+  Hint: Ejecuta en Consola; ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = drv)) + labs(title = "Tipos de autos (class) y proporcion en cada grupo de la variable drv", subtitle = "especificando el parametro fill = drv logramos colorear")
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; mpg %>% group_by(class, drv) %>% summarise(Conteo = n()) %>% mutate(Proporcion_drv = round(Conteo/sum(Conteo),2))
+  CorrectAnswer: mpg %>% group_by(class, drv) %>% summarise(Conteo = n()) %>% mutate(Proporcion_drv = round(Conteo/sum(Conteo),2))
+  AnswerTests: omnitest(correctExpr='mpg %>% group_by(class, drv) %>% summarise(Conteo = n()) %>% mutate(Proporcion_drv = round(Conteo/sum(Conteo),2))')
+  Hint: Ejecuta en Consola; mpg %>% group_by(class, drv) %>% summarise(Conteo = n()) %>% mutate(Proporcion_drv = round(Conteo/sum(Conteo),2))
+
+- Class: text
+  Output: Podemos ver que la clase de autos minivan y 2seater no representan gran parte de nuestro conjunto de datos, ¿Que compartamiento tendran estos autos en relacion con variables numericas?, ¿Valdra la pena excluir estos datos a la hora de modelar?
+
+- Class: text
+  Output: Para examinar variables numericas es bueno usar graficas de puntos o lineas, veamos ¿Que relacion existe entre displ (tamaño del motor) y hwy (millas de autopista por galon)?
+  
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+  CorrectAnswer: ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+  AnswerTests: omnitest(correctExpr='ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()')
+  Hint: Ejecuta en Consola; ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+  
+- Class: text
+  Output: Tenemos una relacion negativa, a medida que crece el tamaño del motor tenemos menos recorrido en millas de autopista por galon.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(mpg, aes(x = displ, y = hwy)) + geom_point(aes(color = displ > 5 & hwy > 22))
+  CorrectAnswer: ggplot(mpg, aes(x = displ, y = hwy)) + geom_point(aes(color = displ > 5 & hwy > 22))
+  AnswerTests: omnitest(correctExpr='ggplot(mpg, aes(x = displ, y = hwy)) + geom_point(aes(color = displ > 5 & hwy > 22))')
+  Hint: Ejecuta en Consola; ggplot(mpg, aes(x = displ, y = hwy)) + geom_point(aes(color = displ > 5 & hwy > 22))
+
+- Class: text
+  Output: Podemos algunos datos inusuales en los que el tamaño del motor no disminuye en recorrido de millas por galon,¿Que clase de autos pertenecen a este conjunto de datos?
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; filter(mpg, displ > 5 & hwy > 22)
+  CorrectAnswer: filter(mpg, displ > 5 & hwy > 22)
+  AnswerTests: omnitest(correctExpr='filter(mpg, displ > 5 & hwy > 22)')
+  Hint: Ejecuta en Consola; filter(mpg, displ > 5 & hwy > 22)
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point()
+  CorrectAnswer: ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point()
+  AnswerTests: omnitest(correctExpr='ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point()')
+  Hint: Ejecuta en Consola; ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point()
+
+- Class: text
+  Output: Podemos ver que los autos de clase 2seater tienen un rendimiento inusual para el tamaño del motor tiene logica al ser autos electricos, recuerdas que estos datos no representaban gran muestra, tal vez si valga la pena excluirlos ya que pueden no ser comparables por ser autos electricos.
+
+- Class: text
+  Output: Al momento de realizar un modelo lineal, tomariamos en cuenta hacer un filtro excluyendo estos datos, para obtener un mejor ajuste sobre esta relacion.
+
+- Class: text
+  Output: Valores tipicos, tanto en los graficos de barras como en puntos, las barras muestran valores comunes de una variable y los puntos una relacion o variacion en los datos. Conviertiendo estos valores en preguntas busquemos lo inesperado.
+
+- Class: text
+  Output: ¿Que manufactureras tengo por cada clase de auto?
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = manufacturer)) + labs(title = "Manufactureras por clase de autos")
+  CorrectAnswer: ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = manufacturer)) + labs(title = "Manufactureras por clase de autos")
+  AnswerTests: omnitest(correctExpr='ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = manufacturer)) + labs(title = "Manufactureras por clase de autos")')
+  Hint: Ejecuta en Consola; ggplot(data = mpg) + geom_bar(mapping = aes(x = class, fill = manufacturer)) + labs(title = "Manufactureras por clase de autos")
+
+- Class: text
+  Output: Recapitulando todo, recuerda que la clase de autos 2seater tienen un comportamiento atipico en relacion a displ y hwy, siendo autos de la manufacturera chevrolet. Es buen ejercicio ir mirando el historico de tus graficas, en la parte inferior derecha tienens una pestaña de graficas o plots con una flecha que te permite regresar entre graficas.
+
+- Class: text
+  Output: Ahora segmentemos entre clases de autos la relacion entre displ y hwy, la pregunta seria ¿Que relacion tienen cada clase de auto, respecto a displ y hwy?
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(data = mpg, aes(color = cyl)) + geom_point(mapping = aes(x = displ, y = hwy)) + facet_wrap(~ class)
+  CorrectAnswer: ggplot(data = mpg, aes(color = cyl)) + geom_point(mapping = aes(x = displ, y = hwy)) + facet_wrap(~ class)
+  AnswerTests: omnitest(correctExpr='ggplot(data = mpg, aes(color = cyl)) + geom_point(mapping = aes(x = displ, y = hwy)) + facet_wrap(~ class)')
+  Hint: Ejecuta en Consola; ggplot(data = mpg, aes(color = cyl)) + geom_point(mapping = aes(x = displ, y = hwy)) + facet_wrap(~ class)
+
+- Class: text
+  Output: No todas las clases de autos tienen una relacion negativa tan clara, mira la clase 2seater, compact, minivan.  
+
+- Class: text
+  Output: Filtremos 2seater, compact, minivan y realizemos de nueva la grafica de relacion lineal.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(data = filter(mpg, !(class %in% c("2seater","compact","minivan"))), aes(color = cyl)) +  geom_point(mapping = aes(x = displ, y = hwy)) + geom_smooth(aes(x = displ, y = hwy), method = "loess")
+  CorrectAnswer: ggplot(data = filter(mpg, !(class %in% c("2seater","compact","minivan"))), aes(color = cyl)) +  geom_point(mapping = aes(x = displ, y = hwy)) + geom_smooth(aes(x = displ, y = hwy), method = "loess")
+  AnswerTests: omnitest(correctExpr='ggplot(data = filter(mpg, !(class %in% c("2seater","compact","minivan"))), aes(color = cyl)) +  geom_point(mapping = aes(x = displ, y = hwy)) + geom_smooth(aes(x = displ, y = hwy), method = "loess")')
+  Hint: Ejecuta en Consola; ggplot(data = filter(mpg, !(class %in% c("2seater","compact","minivan"))), aes(color = cyl)) +  geom_point(mapping = aes(x = displ, y = hwy)) + geom_smooth(aes(x = displ, y = hwy), method = "loess")
+
+- Class: text
+  Output: Al excluir estos datos un modelo lineal ajustaria mejor los datos.
+
+- Class: text
+  Output: Es importante ir jugando con cierta combinacion de variables algunas graficas en ocaciones no tendran sentido pero la idea es ir escarbando en los datos. Tomemos una variable categorica y continua.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(mpg, aes(x = hwy)) + geom_freqpoly(aes(color = class))
+  CorrectAnswer: ggplot(mpg, aes(x = hwy)) + geom_freqpoly(aes(color = class))
+  AnswerTests: omnitest(correctExpr='ggplot(mpg, aes(x = hwy)) + geom_freqpoly(aes(color = class))')
+  Hint: Ejecuta en Consola; ggplot(mpg, aes(x = hwy)) + geom_freqpoly(aes(color = class))
+
+- Class: text
+  Output: La grafica anterior en ocaciones nos muestra una tendencia con variables continuas segmentada en categorias, hechemos un vistazo a su grafica de cajas (un grafico de cajas muestra las estadisticas descriptivas basicas, minimos, maximos, quentiles promedio)
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(data = mpg) + geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) + coord_flip()
+  CorrectAnswer: ggplot(data = mpg) + geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) + coord_flip()
+  AnswerTests: omnitest(correctExpr='ggplot(data = mpg) + geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) + coord_flip()')
+  Hint: Ejecuta en Consola; ggplot(data = mpg) + geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) + coord_flip()
+
+- Class: text
+  Output: Cada clase de auto tiene medidas descriptivas distintas, lo que indica que cada tipo de auto tiene distinto rendimiento hwy (millas por galon). Si nos interesara conocer los autos con un mejor desdempeño, valdra la pena analizar los datos atipicos estos son marcados con puntos negros en la grafica de cajas.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; filter(mpg, (class %in% c("compact", "subcompact") & hwy > 30) | (class %in% c("suv","pickup") & hwy > 20)) %>% group_by(manufacturer, model,class) %>% summarise(Conteo = n())
+  CorrectAnswer: filter(mpg, (class %in% c("compact", "subcompact") & hwy > 30) | (class %in% c("suv","pickup") & hwy > 20)) %>% group_by(manufacturer, model,class) %>% summarise(Conteo = n())
+  AnswerTests: omnitest(correctExpr='filter(mpg, (class %in% c("compact", "subcompact") & hwy > 30) | (class %in% c("suv","pickup") & hwy > 20)) %>% group_by(manufacturer, model,class) %>% summarise(Conteo = n())')
+  Hint: Ejecuta en Consola; filter(mpg, (class %in% c("compact", "subcompact") & hwy > 30) | (class %in% c("suv","pickup") & hwy > 20)) %>% group_by(manufacturer, model,class) %>% summarise(Conteo = n())
+
+- Class: text
+  Output: Tomemos 2 variables categoricas tipo de auto y manufactureras, para ver la relacion. Debemos tomar el numero de observaciones para cada combinacion.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; ggplot(mpg) + geom_count(aes(x = class, y = manufacturer))
+  CorrectAnswer: ggplot(mpg) + geom_count(aes(x = class, y = manufacturer))
+  AnswerTests: omnitest(correctExpr='ggplot(mpg) + geom_count(aes(x = class, y = manufacturer))')
+  Hint: Ejecuta en Consola; ggplot(mpg) + geom_count(aes(x = class, y = manufacturer))
+
+- Class: text
+  Output: El tamaño de cada circulo muestra cuantas observaciones ocurrieron en cada combinacion. Genremos una tabla con estos grupos
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; mpg %>% count(class, manufacturer)
+  CorrectAnswer: mpg %>% count(class, manufacturer)
+  AnswerTests: omnitest(correctExpr='mpg %>% count(class, manufacturer)')
+  Hint: Ejecuta en Consola; mpg %>% count(class, manufacturer)
+
+- Class: text
+  Output: Los tipos de autos en los que tenemos mayor muestra son suv.
+
+- Class: text
+  Output: Ya hemos lanzado un numero de preguntas podemos seguir lanzando preguntas hasta conocer a la perfeccion nuestros datos. Esto puede tomar mucho tiempo y generar caminos sin salida. Digamos que hemos encontrado patrones en los datos, es momento de modelar, dejaremos esto para lecciones posteriores. Practica graficas y resumenes sobre el conjunto de datos mpg.

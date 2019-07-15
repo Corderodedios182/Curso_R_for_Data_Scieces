@@ -1,0 +1,81 @@
+- Class: meta
+  Course: a
+  Lesson: 468.Workflow_basics_scripts_projects
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.4
+
+- Class: text
+  Output: En esta leccion veremos algunas recomendaciones sobre el flujo de trabajo con R. Observa el entorno en Rstudio, te habras percatado que contiene 4 cuadrantes importantes es complicado que te de un tour desde la consola, hechale un vistazo a la siguiente hoja de referencia para conocer mejor las partes de Rstudio "https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf", explora sin miedo cada boton en Rstudio te facilitara la organizacion de tu trabajo.
+
+- Class: text
+  Output: Ahora tienes algo de experiencia ejecutando codigo R, no te di muchos detalles, pero has cubierto lo basico para comenzar. La frustracion es natural cuando comienzas a programar, esto ira disminuyendo con el tiempo es tipico y temporal nos sucede a todos y la unica manera de superarlo es seguir intentando. Antes de continuar veamos codigo R y algunas funciones utiles de Rstudio.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; Porcentaje <- 10 / 100
+  CorrectAnswer: Porcentaje <- 10 / 100
+  AnswerTests: omnitest(correctExpr='Porcentaje <- 10 / 100')
+  Hint: Ejecuta en Consola; Porcentaje <- 10 / 100
+
+- Class: text
+  Output: Con los caracteres "<-" asignas un valor a una variable en el lado superior derecho de Rstudio observa las variables que vamos definiendo y observa su estructura dando un clik en ellas. Es recomendable colocar un nombre claro a nuestras variables, una vez que tengamos variables definidas es facil llamarlas para realizar nuevas operaciones.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; Porcentaje + 12
+  CorrectAnswer: Ejecuta en Consola; Porcentaje + 12
+  AnswerTests: omnitest(correctExpr='Porcentaje + 12')
+  Hint: Ejecuta en Consola; Porcentaje + 12
+
+- Class: text
+  Output: Asignemos un marco de datos a una variable.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; mpg <- mpg
+  CorrectAnswer: Ejecuta en Consola; mpg <- mpg
+  AnswerTests: omnitest(correctExpr='mpg <- mpg')
+  Hint: Ejecuta en Consola; mpg <- mpg
+
+- Class: text
+  Output: Veamos rapidamente el encabezado de nuesto marco de datos (funcion head(), nombres de nuestras columnas (funcion names()), estructura y tipos de variables (funcion str()), y funcion table() para realizar resumenes de una manera rapida.
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; head(mpg)
+  CorrectAnswer: Ejecuta en Consola; head(mpg)
+  AnswerTests: omnitest(correctExpr='head(mpg)')
+  Hint: Ejecuta en Consola; head(mpg)
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; names(mpg)
+  CorrectAnswer: Ejecuta en Consola; names(mpg)
+  AnswerTests: omnitest(correctExpr='names(mpg)')
+  Hint: Ejecuta en Consola; names(mpg)  
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; str(mpg)
+  CorrectAnswer: Ejecuta en Consola; str(mpg)
+  AnswerTests: omnitest(correctExpr='str(mpg)')
+  Hint: Ejecuta en Consola; str(mpg)
+
+- Class: cmd_question
+  Output: Ejecuta en Consola; table(mpg$class)
+  CorrectAnswer: Ejecuta en Consola; table(mpg$class)
+  AnswerTests: omnitest(correctExpr='table(mpg$class)')
+  Hint: Ejecuta en Consola; table(mpg$class)
+
+- Class: text
+  Output: Tal vez no sean las funciones mas potentes para automatizar procesos, pero te recomiendo tener a la mano funciones que te hagan sentir comodo al momento de comenzar, por ejemplo a mi me funciona mostrar el encabezado de un marco de datos para ver que todo va bien de igual forma el tipo de variables que tengo y pequeños resumenes express. En esta leccion no profundizare sobre el lenguaje R pero si quieres saber mas hechale un vistazo a la siguiente hoja de referencia "https://www.rstudio.com/wp-content/uploads/2016/05/base-r.pdf", te recomiendo ampliamente al terminar esta leccion abrir un nuevo script y ejecutar con calma la hoja de referencia y adueñate de tus funciones que te hagan sentir comodo para iniciar.
+
+- Class: text
+  Output: Hasta ahora hemos usado la consola para ejecutar codigo. Es un buen lugar para comenzar, pero encontraras que se vuelve muy pequeño a medida que creas graficos, transormaciones, modelos, etc... Nada como tener bien documentado un buen codigo, siempre ten en mente que otros programadores pueden leer tu codigo o tu mismo querras hacer modificaciones y aveces puede ser una gran perdida de tiempo descifrar que hace un codigo.
+
+- Class: text
+  Output: Para esto nos sirven los scripts, un problema comun de los programadores es que no seguimos estandares a la hora de escribir codigo. Esto provoca que sea complicado para otros leer y llevar a produccion nuestro codigo. Siempre he pensado, aprende la sintaxis y luego aprende a programar. Escribir buen codigo es saber programar. Si ya sabes que es un if ¡exelente!, ahora busca como debe escribirse de forma correcta. Existen programadores que desarrollan su propio estandar con la intencion de que nadie les copie la idea. Es decir, el hecho de que no se entienda su codigo es intencional. Y esto esta mal. Sobre todo por que a los seis meses ni ellos sabran que hicieron ni por que lo hicieron. Lo digo por experiencia propia. Hechale un vistazo a "https://es.wikipedia.org/wiki/Estilo_de_programaci%C3%B3n" para saber mas sobre estilo de codigo.
+
+- Class: text
+  Output: Bien supongamos que tenemos organizado y estructurados nuestros scripts, puedes ver en la parte superior derecha un boton que dice proyectos con esta seccion puede guardar todos tus scripts en una misma carpeta. La ventaja de crear este tipo de carpetas es que R automaticamente identifica los proyectos que tienes con codigo R.
+
+- Class: text
+  Output: Bien, tenemos todo organizado dentro de nuestra computadora local. ¿Que sucede si trabajamos en un equipo de Cientificos de Datos y es necesario compartir nuestro codigo?. Para tener un control de nuesto proyecto existen los Sistemas de Control de Versiones, Git es un software fuera de R, creado para la gestion de los diversos cambios que se realizan sobre los elementos de algun proyecto, en otras palabras es lo que se hace al momento de desarrollar software. Exactamente es cuando subes o actualizas tu codigo en la nube, o le agregas nuevas partes. Piensa en lo util que es esto ya que algunos pueden estar desarrollando codigo para limpieza de datos, otros graficas y modelos al final pueden unificar todo este trabajo. En estas lecciones no hablaremos sobre git y github pero seria muy bueno que le hecharas una googleada te sera muy util en tu vida profesional y te permitira trabajar de una manera mas ordenada y sana.
+
+
