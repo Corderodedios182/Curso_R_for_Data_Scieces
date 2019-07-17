@@ -46,7 +46,7 @@
   Hint: Ejecuta en Consola; tibble(x = 1:5, y = 1, z = x ^ 2 + y)
 
 - Class: text
-  Output: Observa que el data.frame nos indica que x y y deberian estar predefinidos antes de inculir al marco de datos, cosa que un tibble nos permite colocar todo junto.
+  Output: Observa que al crear un marco de datos tibble no es necesario predefinir "x" y "y" antes. En un data.frame para crear la columna z deberiamos definir el vector z y luego agragarlo al data.frame, tibble nos permite agrupar todo junto.
 
 - Class: text
   Output: Otra diferencia es que dentro de un tibble podemos colocar nombres de columnas con metacaracetes especiales y en un data.frame esto no esta permitido.
