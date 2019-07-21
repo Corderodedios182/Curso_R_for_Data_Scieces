@@ -7,10 +7,13 @@
   Version: 2.4.4
 
 - Class: text
-  Output: Hasta el momento hemos trabajado con datos precargados en R. En la vida real sera necesario ir por nuestros datos, aprenderemos a leer 5 tipos de fuentes, archivos de texto, exceles, Bases de Datos, Web, Software especiales como SAS,SPSS,STATA.
+  Output: Hasta el momento hemos trabajado con datos precargados en R. En la vida real sera necesario ir por nuestros datos, esencialmente existen 6 tipos de fuentes de informacion, archivos de texto, exceles, Bases de Datos SQL y NoSQL, Paginas Web, Software especiales como SAS,SPSS,STATA y APIs.
+
+- Class: text
+  Output: En esta leccion solo introducire la importacion de datos con las funciones basicas para arhivos csv y exceles.
   
 - Class: text
-  Output: Comenzemos por archivos de texto o csv, el primer argumento de nuestra funcion read.csv() es la ruta donde se encuentra nuestro archivo seguido del nombre del archivo. En este ejemplo trabajamos con datos que viven en una ruta http pero es comun trabajar con rutas locales.
+  Output: Comenzemos trabajando con archivos csv. Ocupando la funcion read.csv(), solo es necesario colocar la ruta y el nombre de nuestro archivo veamos un ejemplo;
 
 - Class: cmd_question
   Output: Ejecuta en Consola; swimming <- read.csv("https://assets.datacamp.com/production/repositories/453/datasets/0badb39b50c7daf000698efbca476716db7c1a6f/swimming_pools.csv")
@@ -25,7 +28,7 @@
   Hint: Ejecuta en Consola; str(swimming)
 
 - Class: text
-  Output: En el ejemplo anterior no colocamos ningun parametro en la funcion read.csv(), si nuestros datos ya vienen limpios sera facil importar marcos de datos a R, en ocasiones R coloca los datos tipo caracter como Factores para evitar esto podemos agregar el parametro stringsAsFactor = FALSE (trabajar con tipos de datos Factor, puede provocar errores en algunas funciones que trabajan con caracteres)
+  Output: En el ejemplo anterior solo colocamos la ruta donde se localiza el archivo "swimming_pools.csv", observa la estructura del marco de datos te podras percatar que las 2 primeras columnas se importaron como tipos de datos Factores. En ocasiones querras importar estos datos como tipo caracter. Agreguemos el parametro stringsAsFactors = FALSE y veamos que sucede.
 
 - Class: cmd_question
   Output: Ejecuta en Consola; pools <- read.csv("https://assets.datacamp.com/production/repositories/453/datasets/0badb39b50c7daf000698efbca476716db7c1a6f/swimming_pools.csv", stringsAsFactors = FALSE)
@@ -40,16 +43,19 @@
   Hint: Ejecuta en Consola; str(pools)
 
 - Class: text
-  Output: Observa como la estructura de nuesto Marco de datos a cambiado. El mundo exterior esta lleno de distintos formatos de Marcos de Datos, R tiene multiples funciones que facilitan el trabajo de importacion. Por ejemplo, adicional a csv tenemos archivos de texto la lectura de estos archivos se realiza con la funcion read.delim(), contiene parametros similares a read.csv(). 
+  Output: Observa como la estructura de nuesto Marco de datos a cambiado, importando las 2 primeras columnas como tipo caracter. El mundo exterior esta lleno de distintos formatos de Bases de Datos, R tiene multiples funciones que facilitan el trabajo de importacion. Por ejemplo, adicional a csv tenemos archivos de texto, la lectura de estos archivos se realiza con la funcion read.delim().
 
 - Class: text
-  Output: Veremos distintas funciones read, juguemos con algunos parametros utiles en caso de que nuestros marcos de datos contengan algun inconveniente a la hora de importarlos. Por ejemplo que pasa si nuestros datos no contienen un encabezado, parametro header = FALSE (Respeta una nueva fila colocando nombres estandares. Ejemplo; X1,X2,X3) y con parametro col.names = c("type","calories","sodium"),colocamos el nombre a las columnas, tambien podemos especificar el tipo de datos de cada columna  con colClasses = c("factor","NULL", "numeric")
+  Output: Ahora leamos un arhivo txt, solo colocaremos la ruta dentro de la funcion read.delim()
 
 - Class: cmd_question
   Output: Ejecuta en Consola; hotdogs <- read.delim("https://assets.datacamp.com/production/repositories/453/datasets/3e5a732b4467c1cbed6a8e8e7a1c9eec3fc86c58/hotdogs.txt")
   CorrectAnswer: hotdogs <- read.delim("https://assets.datacamp.com/production/repositories/453/datasets/3e5a732b4467c1cbed6a8e8e7a1c9eec3fc86c58/hotdogs.txt")
   AnswerTests: omnitest(correctExpr='hotdogs <- read.delim("https://assets.datacamp.com/production/repositories/453/datasets/3e5a732b4467c1cbed6a8e8e7a1c9eec3fc86c58/hotdogs.txt")')
   Hint: Ejecuta en Consola; hotdogs <- read.delim("https://assets.datacamp.com/production/repositories/453/datasets/3e5a732b4467c1cbed6a8e8e7a1c9eec3fc86c58/hotdogs.txt")
+
+- Class: text
+  Output: En este caso nuestro archivo no tiene nombres de columnas, ¿Como lo resolvemos?
 
 - Class: cmd_question
   Output: Ejecuta en Consola; head(hotdogs)
@@ -58,7 +64,7 @@
   Hint: Ejecuta en Consola; head(hotdogs)
 
 - Class: text
-  Output: Observa que al agregar parametros de forma adecuado nuestros datos iran tomando sentido.
+  Output: Agregaremos parametros para colocar nombre y tipo de datos. Especificando parametro; header = FALSE (Respeta una nueva fila colocando nombres estandares. Ejemplo; X1,X2,X3), parametro col.names = c("type","calories","sodium") (colocamos el nombre a las columnas), parametro colClasses = c("factor","NULL", "numeric") (Tipo de datos que queremos)
 
 - Class: cmd_question
   Output: Ejecuta en Consola; hotdogs <- read.delim("https://assets.datacamp.com/production/repositories/453/datasets/3e5a732b4467c1cbed6a8e8e7a1c9eec3fc86c58/hotdogs.txt", header = FALSE, col.names = c("type","calories","sodium"),colClasses = c("factor","numeric", "numeric"))
@@ -73,6 +79,9 @@
   Hint: Ejecuta en Consola; str(hotdogs)
 
 - Class: text
+  Output: Hemos importado correctamente el arhivo hotdogs.txt
+
+- Class: text
   Output: De igual forma podemos controlar que parte del archivo plano queremos importar, parametro skip = 2 especifica el numero de linea que esta ignorando en el archivo antes de comenzar a leer y nrows = 3 numero de lineas que realmente esta importando.
   
 - Class: cmd_question
@@ -82,7 +91,7 @@
   Hint: Ejecuta en Consola; read.delim("https://assets.datacamp.com/production/repositories/453/datasets/3e5a732b4467c1cbed6a8e8e7a1c9eec3fc86c58/hotdogs.txt", header = FALSE, skip = 2, nrows = 3)
 
 - Class: text
-  Output: En ocasiones tenemos csv muy pesados que tardan mucho en importar, para estos apuros tenemos la funcion fread() es extramadamente rapida y contiene argumentos similares. Esta funcion es parte del paquete data.table tal vez es posible que necesites instalarlo en ese caso ejecuta install.package("data.table") y vuelve a leer la paqueteria
+  Output: En ocasiones tenemos csv muy pesados que tardan mucho en importar, para estos apuros tenemos la funcion fread() es extramadamente rapida y contiene argumentos similares. Esta funcion es parte del paquete data.table tal vez es posible que necesites instalarlo en ese caso ejecuta; install.package("data.table") y despues ejecuta; library(data.table)
 
 - Class: cmd_question
   Output: Ejecuta en Consola; library(data.table)
@@ -100,7 +109,7 @@
   Output: Un parametro util de la funcion fread(), select = c(1,2) permite especifica la columna deseada
 
 - Class: text
-  Output: Ahora veamos como trabajar con Archivos de excel. Trabajar con archivos de excel puede ser ligeramente mas complicado ya que tienen una estructura muy distinta a un csv. Existen distitas paqueterias para importar exceles, comanzaremos ocupando la paqueteria readxl en caso de no tenerla instalada ejecuta install.packages("readxl").
+  Output: Veamos como importar un Archivos de excel. Trabajar con archivos de excel es distinto que leer un csv o un archivo de texto, ya que contiene multiples hojas con informacion. Existen distitas paqueterias para importar exceles, comanzaremos ocupando la paqueteria readxl en caso de no tenerla instalada ejecuta; install.packages("readxl").
 
 - Class: cmd_question
   Output: Ejecuta en Consola; library(readxl)
@@ -112,16 +121,16 @@
   Output: Dentro del curso tenemos un archivo de excel para trabajar, sigue los siguientes pasos para colocarnos en la ruta adecuada.
   
 - Class: text
-  Output: Primero identifica la ruta donde tienes guardado la carpeta Curso_R_for_Data_Scieces, dentro de ella vive una carpeta llamada 10_Data_Import aqui tenemos el archivo de excel. Con la funcion setwd() posicionaremos a R para leer el excel. Por ejemplo;  setwd("~/git_workspace/Curso_R_for_Data_Scieces/10_Data_Import/")
+  Output: Primero identifica la ruta donde tienes guardada la carpeta "Curso_R_for_Data_Scieces", dentro de ella vive una carpeta llamada "10_Data_Import" dentro encotraremos el archivo "urbanpop.xlsx". Nos posicionaremos en la ruta donde vive nuestro arhivo "urbanpop.xlsx", con la funcion setwd() posicionaremos a R para leer el excel. Por ejemplo; setwd("~/git_workspace/Curso_R_for_Data_Scieces/10_Data_Import/")
 
 - Class: cmd_question
-  Output: Ejecuta en Consola; getwd()
+  Output: Ejecuta en Consola "getwd()" para validar que estas en la ruta correcta.
   CorrectAnswer: getwd()
   AnswerTests: omnitest(correctExpr='getwd()')
   Hint: Ejecuta en Consola; getwd()
 
 - Class: text
-  Output: Si te posicionaste de manera correcta deberas ver el archivo urbanpop.xlsx, en caso contrario coloca correctamente la ruta en la funcion setwd("").
+  Output: Si te posicionaste de manera correcta deberas ver el archivo urbanpop.xlsx, con la funcion list.files() pudes saber el listado de archivo, en caso de no ver el archivo de excel "urbanpop.xlsx". Revisa la ruta que colocaste en la funcion setwd(), tal vez colocaste mal la ruta.
   
 - Class: cmd_question
   Output: Ejecuta en Consola; list.files()
@@ -130,19 +139,22 @@
   Hint: Ejecuta en Consola; list.files()
 
 - Class: text
-  Output: Estamos listos para usar las funciones de excel, comenzemos leyendo las hojas del archivo con la funcion excel_sheets("urbanpop.xlsx")
+  Output: Si logras ver el archivo "urbanpop.xlsx". Estamos listos para usar las funciones de excel.
+  
+- Class: text
+  Output: El primer paso para leer informacion de un excel es identificando el nombres de las hojas que contiene el arhcivo. Comenzemos leyendo las hojas del archivo con la funcion excel_sheets("urbanpop.xlsx")
 
 - Class: cmd_question
-  Output: Ejecuta en Consola; excel_sheets("urbanpop.xlsx")
+  Output: En caso de estar seguro que nos encontramos en la ruta correcta para trabajar con el archivo "urbanpop.xlsx" Ejecuta en Consola; excel_sheets("urbanpop.xlsx").
   CorrectAnswer: excel_sheets("urbanpop.xlsx")
   AnswerTests: omnitest(correctExpr='excel_sheets("urbanpop.xlsx")')
-  Hint: Ejecuta en Consola; excel_sheets("urbanpop.xlsx")
+  Hint: Revisa la ruta donde te encuentras trabajando con getwd(), valida que puedas ver el archivo urbanpop.xlsx con la funcion list.files(), Posicionate con la funcion setwd() en la ruta correcta.
 
 - Class: text
-  Output: Tenemos 3 hojas dentro del excel, con nombres que nos idican que en cada hoja tenemos datos por años.
+  Output: El arhivo "urbanpop.xlsx" contiene 3 hojas, cada hoja contiene informacion de distintos años.
 
 - Class: text
-  Output: ¿Como vamos a leer cada hoja?, con la funcion read_excel("urbanpop.xlsx"), debemos especifica el numero de hoja que deseamos leer con el parametro sheet = 1 (Leeremos la hoja uno de nuestro archivo)
+  Output: ¿Como vamos a importaremos cada hoja?, la funcion read_excel("urbanpop.xlsx") solo necesita del parametro "sheet = 1" (Lee la primera hoja del archivo "urbanpop.xlsx")
 
 - Class: cmd_question
   Output: Ejecuta en Consola; head(read_excel("urbanpop.xlsx", sheet = 1))
@@ -151,10 +163,10 @@
   Hint: Ejecuta en Consola; head(read_excel("urbanpop.xlsx", sheet = 1))
 
 - Class: text
-  Output: Observa que la primera hoja contiene datos de 1960 a 1966, si quisieramos leer todas las hojas y almacenarlas todas juntas en un mismo conjunto de datos. Podemos comenzar alamcenarlas en una lista. Donde el elemento de cada lista es una hoja del archivo de excel.
+  Output: Efectivamente la primera hoja contiene datos de 1960 a 1966, si quisieramos leer todas las hojas y almacenarlas todas juntas en un mismo conjunto de datos. Podemos comenzar alamcenarlas en una lista. Donde el elemento de cada lista es una hoja del archivo "urbanpop.xlsx".
 
 - Class: text
-  Output: Cada hoja la podemos almacenar como elemento de una lista.
+  Output: Crearemos una lista, donde cada elemento representa una hoja de datos del arhivo "urbanpop.xlsx"
   
 - Class: cmd_question
   Output: Ejecuta en Consola; pop_list <- list(read_excel("urbanpop.xlsx", sheet = 1),read_excel("urbanpop.xlsx", sheet = 2),read_excel("urbanpop.xlsx", sheet = 3))
@@ -169,7 +181,7 @@
   Hint: Ejecuta en Consola; head(pop_list)
 
 - Class: text
-  Output: En el codigo anterior genero una lista donda cada elemento corresponde a una hoja del excel que importo. Sin, embargo, cargar cada hoja manualmente y luego combinarlas en una lista puede ser bastante tedioso. Por suerte puede automatizar esto con la funcion lapply(). Si no tienes experiencia con lapply() te recomiendo pedir ayuda con ?lapply.
+  Output: En el codigo anterior genero una lista donda cada elemento corresponde a una hoja del arhivo "urbanpop.xlsx". Sin, embargo, cargar cada hoja manualmente y luego combinarlas en una lista puede ser bastante tedioso. Por suerte puede automatizar esto con la funcion lapply(). Si no tienes experiencia con lapply() hecha un vistazo con ?lapply.
 
 - Class: cmd_question
   Output: Ejecuta en Consola; pop_list <- lapply(excel_sheets("urbanpop.xlsx"), read_excel, path = "urbanpop.xlsx")
@@ -187,7 +199,7 @@
   Hint: Ejecuta en Consola; head(pop_list)
 
 - Class: text
-  Output: Tal vez no estemos acostumbrados a trabajar con listas y queremos tener todo en una mismo marco de datos, podriamos leer cada hoja de manera independiente y unirlo todo con la funcion cbind(). Todo dependera de la estructura de nuestro archivo de excel, recuerda que le comente que es un poco mas laborioso trabajar con exeles solo es cuestion de ser organizado y cuidadoso al momento de leer hojas.
+  Output: Tal vez no estemos acostumbrados a trabajar con listas y queremos tener todo en una mismo marco de datos, podriamos leer cada hoja de manera independiente y unirlo todo con la funcion cbind(). Todo dependera de la estructura de nuestro archivo de excel. Trabajar con archivos de excel requiere de cuidado y orden, conocer las hojas y el posicionamiento de la informacion.
 
 - Class: text
   Output: Funcion read_excel(), tiene argumentos similares a las demas funciones. En ocasiones sera necesario especificar el numero de fila que desea comenzar a leer, especificar nombre de columnas, tipos de datos, etc.
@@ -202,26 +214,11 @@
   Output: Una ventaja de la paqueteria XLConnect es que la conexion inicial que crea con la funcion loadWorkbook(), permite manipular el excel desde R exportando datos en las hojas o creando nuevas hojas. Revise funciones createSheet(), writeWorksheet(), saveWorkbook(), renameSheet(), removeSheet().
 
 - Class: text
-  Output: Bien dejemos de un lado los arcvhivos locales, R puede conectarse con multiples motores de Bases de Datos. Siendo el mas comun MySQL o PostgresSQL.
-
-- Class: text
-  Output: En esta leccion no revisaremos conexiones a motores de Bases de datos, ya que no contamos con una Arquitectura montada. Para saber mas consulta https://support.rstudio.com/hc/en-us/articles/115010915687 
-
-- Class: text
-  Output: Puedes buscar tutoriales con paqueterias DBI, RODBC, RMySQL,etc. Existe una amplia gama de motores de bases de datos tanto SQL como NoSQL.
-
-- Class: text
   Output: Tambien tenemos formas de importar datos desde la web, las funciones read_csv(), read_tsv() permiten leer marcos de datos almacenado en algun servidor de la web que tiene libre acceso.
 
 - Class: text
-  Output: Tengamos en cuenta que no siempre tendremos acceso libre a los servidores por lo que debemos conocer sobre llaves de acceso conocido como APIs, tampoco tendremos marcos de datos estructurados. La mayoria de la informacion de la web se almacena en tipos de datos JSON (una forma de hilar este concepto de JSON es verlo como un diccionario en R, JSON es considerado una base de datos NoSQL) 
+  Output: En los ejemplos anteriores colocabamos una ruta http:// que nos dirigia a un servidor S3 de Amazon Web Services.
 
-- Class: text
-  Output: Al ser un tema muy extenso el tema de importar datos de la web, veremos ejemplos sencillos. Pero suficientemente claros para elevar el nivel de extraccion de datos. Recuerde que una de las habilidades mas importantes de un Cientifico de Datos es analizar una gran cantidad de datos y que mejor que extraer datos de la WEB.
-
-- Class: text
-  Output: La forma de solicitar datos en la web es mediante un cliente que realiza una peticion http a un servidor y el servidor da una respuesta positiva o negativa.
-  
 - Class: cmd_question
   Output: Ejecuta en Consola; pools <- read_csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/swimming_pools.csv")
   CorrectAnswer: pools <- read_csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/swimming_pools.csv")
@@ -229,7 +226,7 @@
   Hint: Ejecuta en Consola; pools <- read_csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/swimming_pools.csv")
   
 - Class: text
-  Output: En los ejemplos anteriores estuvimos trabajando con protocolos http:// , sin embargo existen alternativas mas seguras llamadas https:// que significan protocolo de transferencia de hipertexto seguor.
+  Output: En ocasiones veras escrito http y https, esto nos indica el protocolo un protocolo de seguridad en el caso de https:// significa "protocolo de transferencia de hipertexto seguro". 
 
 - Class: cmd_question
   Output: Ejecuta en Consola; pools1 <- read.csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/swimming_pools.csv")
@@ -238,106 +235,9 @@
   Hint: Ejecuta en Consola; pools1 <- read.csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/swimming_pools.csv")  
 
 - Class: text
-  Output: Anteriormente te mostre distintas paqueterias para trabaar con exceles, para descargar exceles desde una llamada http:// ocuparemos la paqueteria "gdata" ya que la funcion read.xls() de la paqueteria "readxl" no funciona para este caso.
-
-- Class: text
-  Output: Tal vez es necesario descargar la paqueteria gdata, ejecuta install.packages("gdata")
+  Output: Importar datos a R es sencillo, una vez que domines las funciones read_csv(), read_excel(), etc... Iras ampliando tu portafolio de herramientas para importar datos como ejemplo puedes revisar conexiones con MySQL, paginas web o APIs.
   
-- Class: cmd_question
-  Output: Ejecuta en Consola; excel_gdata <- read.xls("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls")
-  CorrectAnswer: excel_gdata <- read.xls("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls")
-  AnswerTests: omnitest(correctExpr='excel_gdata <- read.xls("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls")')
-  Hint: Ejecuta en Consola; excel_gdata <- read.xls("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls")
   
-- Class: text
-  Output: Primero descargaremos el archivo con la funcion download.file(), despues podremos leer el archivo con read_excel()
   
-- Class: cmd_question
-  Output: Ejecuta en Consola; download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls", destfile = "local_latitude.xls")
-  CorrectAnswer: download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls", destfile = "local_latitude.xls")
-  AnswerTests: omnitest(correctExpr='download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls", destfile = "local_latitude.xls")')
-  Hint: Ejecuta en Consola; download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_1478/datasets/latitude.xls", destfile = "local_latitude.xls")
-  
-- Class: text
-  Output: Puedes ver que se ha descargado el archivo a tu ruta local
-  
-- Class: cmd_question
-  Output: Ejecuta en Consola; list.files()
-  CorrectAnswer: list.files()
-  AnswerTests: omnitest(correctExpr='list.files()')
-  Hint: Ejecuta en Consola; list.files()
-  
-- Class: text
-  Output: Leyendo el archivo
-  
-- Class: cmd_question
-  Output: Ejecuta en Consola; excel_readxl <- read_excel("local_latitude.xls")
-  CorrectAnswer: excel_readxl <- read_excel("local_latitude.xls")
-  AnswerTests: omnitest(correctExpr='excel_readxl <- read_excel("local_latitude.xls")')
-  Hint: Ejecuta en Consola; excel_readxl <- read_excel("local_latitude.xls")
 
-- Class: text
-  Output: Hay mas cosas que se pueden hacer con download.file(), podemos descargar cualquier archivo de la web, utilizando protocolos http y https
 
-- Class: text
-  Output: Descargar un archivo de Internet significa enviar una solicitud GET y recibir el archivo que solicito. Internamente, todas las funciones discutidas anteriormente utilizan una solicitud GET para descargar archivos.
-
-- Class: text
-  Output: paqueteria httr proporciona una función conveniente, GET() para ejecutar esta solicitud GET. El resultado es un "response" objeto que proporciona un acceso facil al codigo de estado, el tipo de contenido y, por supuesto, el contenido real.
-
-- Class: text
-  Output: Puede extraer el contenido de la solicitud utilizando la content() funcion. Al momento de escribir, hay tres formas de recuperar este contenido; como un objeto en bruto, como un vector de caracteres o un objeto R, como una lista. Si no dice content() como recuperar el contenido a traves del argumento, hará todo lo posible para averiguar que tipo es el mas apropiado segun el tipo de contenido.
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; library(httr)
-  CorrectAnswer: library(httr)
-  AnswerTests: omnitest(correctExpr='library(httr)')
-  Hint: Ejecuta en Consola; library(httr)
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; resp <- GET("http://www.example.com/")
-  CorrectAnswer: resp <- GET("http://www.example.com/")
-  AnswerTests: omnitest(correctExpr='resp <- GET("http://www.example.com/")')
-  Hint: Ejecuta en Consola; resp <- GET("http://www.example.com/")
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; resp
-  CorrectAnswer: resp
-  AnswerTests: omnitest(correctExpr='resp')
-  Hint: Ejecuta en Consola; resp
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; raw_content <- content(resp, as = "raw")
-  CorrectAnswer: raw_content <- content(resp, as = "raw")
-  AnswerTests: omnitest(correctExpr='raw_content <- content(resp, as = "raw")')
-  Hint: Ejecuta en Consola; raw_content <- content(resp, as = "raw")
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; head(raw_content)
-  CorrectAnswer: head(raw_content)
-  AnswerTests: omnitest(correctExpr='head(raw_content)')
-  Hint: Ejecuta en Consola; head(raw_content)
-  
-- Class: text
-  Output: El contenido web no se limita a las paginas HTML y los archivos almacenados en servidores remotos como las instancias de Amazon S3. Hay muchos otros formatos de datos por ahí. Una muy comun es JSON. Este formato es muy a menudo utilizado por las llamadas API web, interfaces con servidores web con los que usted, como cliente, puede comunicarse para obtener o almacenar informacion de formas mas complicadas.
-
-- Class: text
-  Output: Aprendera sobre las API Web y JSON en el los siguiente ejemplos.
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; resp <- GET("http://www.omdbapi.com/?apikey=72bc447a&t=Annie+Hall&y=&plot=short&r=json")
-  CorrectAnswer: resp <- GET("http://www.omdbapi.com/?apikey=72bc447a&t=Annie+Hall&y=&plot=short&r=json")
-  AnswerTests: omnitest(correctExpr='resp <- GET("http://www.omdbapi.com/?apikey=72bc447a&t=Annie+Hall&y=&plot=short&r=json")')
-  Hint: Ejecuta en Consola; resp <- GET("http://www.omdbapi.com/?apikey=72bc447a&t=Annie+Hall&y=&plot=short&r=json")
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; resp
-  CorrectAnswer: resp
-  AnswerTests: omnitest(correctExpr='resp')
-  Hint: Ejecuta en Consola; resp
-
-- Class: cmd_question
-  Output: Ejecuta en Consola; content(resp, as = "text")
-  CorrectAnswer: content(resp, as = "text")
-  AnswerTests: omnitest(correctExpr='content(resp, as = "text")')
-  Hint: Ejecuta en Consola; content(resp, as = "text")
