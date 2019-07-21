@@ -1,0 +1,10 @@
+- Class: meta
+  Course: Curos_R_for_Data_Sciences
+  Lesson: 12_Tidy_Data
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.4
+
+- Class: text
+  Output: Hasta el momento hemos trabajado con datos precargados en R. En la vida real sera necesario ir por nuestros datos, esencialmente existen 6 tipos de fuentes de informacion, archivos de texto, exceles, Bases de Datos SQL y NoSQL, Paginas Web, Software especiales como SAS,SPSS,STATA y APIs.
